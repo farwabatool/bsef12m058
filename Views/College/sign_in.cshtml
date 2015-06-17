@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "sign_in";
+    }
+
+
+
+@section sign_in
+{
+    <head>
+        <title>Sign in</title>
+         <script src="../../Content/jquery-1.8.0.js"></script>
+         <script>
+
+            
+             function f3()
+             {
+                 $("input[type=submit]").removeAttr('disabled');
+                 $("#errorMessage").text("");
+             }
+
+             function f1() {
+
+                 var name = $("#colName").val();
+                 var pass = $("#pass").val();
+                 if (name == "" || pas == "") {
+                     $.getJSON("/College/validateCollege?colName=" + name + "&pass=" + pass, function (data) {
+
+
+                         if (data == false) {
+                             $("#errorMessage").text("Invalid college name or password");
+                             $("input[type=submit]").attr('disabled', 'disabled');
+
+                         }
+                         else {
+
+                             $("#errorMessage").text("");
+                             $("input[type=submit]").removeAttr('disabled');
+                         }
+                     });
+                 }
+                 else
+                 {
+                     $("#errorMessage").text("");
+                     $("input[type=submit]").removeAttr('disabled');
+                 }
+             }
+        </script>
+
+
+    </head>
+}
+     <div id="sign_in_data"  class="container" >
+        <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Sign in</p> 
+         <p style="font-size:30px ; font-family:Batang ; text-align:center">Only approved colleges can login.</p> 
+       
+        @using (Html.BeginForm("update_college_data", "College", FormMethod.Post, new { style = "margin:80px 0 0 400px" }))
+         {   <table style:"align:center" cellpadding="10" >
+ 
+            <!----- College Name ---------------------------------------------------------->
+            <tbody><tr>
+            <td><label  style="font-family:Batang"> College Name: </label></td>
+            <td> <input type="text" placeholder="LC" name="collegeName" class = "form-control" id="colName" , onKeyDown="f3()" />    
+             </td>
+                
+            </tr>
+            <!----- Password ---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang"> Password:</label>  </td>
+            <td><br />  <input type="password" placeholder="****" name="password" class = "form-control" id="pass" , onKeyDown="f3()"/>
+             </td>
+            </tr>
+                </tbody>
+                </table>
+
+            <br />
+             <input style="margin:10px 0 0 50px"  type="submit" class="btn btn-success" value="Sign in" onmouseover="f1()" />
+          <button style="margin:10px 0 0 50px"  type="reset" class="btn btn-warning" >Cancel</button>
+           <br />
+              <br />
+             <div id="errorMessage" style="font-weight:bolder;margin-left:6% ; color:yellow"></div>
+         }
+          
+        <br />  <br />
+        <br />  <br />
+        <br />  <br />
+    </div>
+  

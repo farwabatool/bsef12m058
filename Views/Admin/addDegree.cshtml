@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "after_login";
+}
+
+@section addDegree
+{
+    @model EAD_Term_Project.Models.Degree
+    <head>
+        <title>Add Degree</title>
+       
+    </head>
+    <script src="../../Content/jquery-1.8.0.js"></script>
+    <script>
+        function f2()
+        {
+            $("#errorMessage").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+       
+        function f1() {
+            var name = $("#name").val();
+            if (name != null && name != "")
+            {
+                $.getJSON("/Admin/validateDegree?Degreename=" + name, function (data) {
+                    if (data == false) {
+                        $("#errorMessage").text("This degree already exist");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                    }
+
+                    else {
+                        $("#errorMessage").text("");
+                        $("input[type=submit]").removeAttr('disabled');
+                    }
+                });
+            }
+            else
+            {
+                $("#errorMessage").text("Invalid Degree Name");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+           
+        }
+       
+    </script>
+
+
+
+}
+  
+
+<div class="row">
+    <div class="col-md-3" id="partial">
+          <script>
+              $("#partial").load("/Default1/SideView", "d1");
+        </script>
+    </div>
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Welcome Admin</p> 
+        
+
+    <form action="saveNewDegree" method="post">
+
+       <div style="margin-left:40% ; font-size:x-large">
+    <br/>
+        
+        
+           <table style="margin-left:10% ; font-size:x-large">
+              
+           
+       <tr><td> @Html.LabelFor(m=>m.DegreeName)&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+           <td><br />@Html.TextBoxFor(m=>m.DegreeName , new {id="name", @class = "form-control" ,  @onKeyDown="f2()"  })
+               <br/>
+                
+           </td></tr>
+       <tr> <td><input type="submit" class="btn btn-success" value="Add" style="margin-top:2%;margin-left:100%"  onmousemove="f1()"  />
+        </td></tr></table>
+
+           <br />
+           <div id="errorMessage" style="font-weight:bolder; margin-left:33% ; color:yellow"></div> 
+           </div>
+        
+        
+        <br />
+         
+</form>
+
+    </div>

@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "sign_up";
+   
+}
+
+
+@section sign_up
+{
+    
+ @model EAD_Term_Project.Models.CollegeRequest
+    <head>
+        <title>Sign up</title>
+    </head>
+
+
+    <script src="../../Content/jquery-1.8.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#colName").blur(function ()
+            {
+                var name =  $("#colName").val();
+                $.getJSON("/College/CheckCollegeName?ColName=" + name, function (data)
+                {
+                    if (data == false)
+                    {
+                        $("#alertMessage1").text("This name already exist");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                    }
+                    else {
+                        $("#alertMessage1").text("");
+                        $("input[type=submit]").removeAttr('disabled');
+                    }
+                });
+                
+                
+
+            });
+
+
+        });
+        function f3() {
+            $("#alertMessage2").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+        function OnMouseOver() {
+
+            var name = $("#colName").val();
+            var a = $("#address").val();
+            var b = $("#pass").val();
+            var c = $("#city").val();
+            var d = $("#pass").val();
+            var e = $("#img").val();
+            var f = $("#des").val();
+            if (a == "" || b == "" || c == "" || d == "" || e == "" || f == "" || name == "") {
+                $("#alertMessage2").text("Please fill all fields");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+            else {
+                $("#alertMessage2").text("");
+                $("input[type=submit]").removeAttr('disabled');
+            }
+        }
+
+    </script>
+
+}
+     <div id="sign_up_data" style="font-weight:500 ; font-size:large" class="container" >
+      
+     
+        
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Register</p> 
+      <p style="font-size:30px ; font-family:Batang ; text-align:center">Here You just register your college. You may add your merit details after aprovel. You can see college lists to check approval or rejection with in 1 day.</p> 
+         <br /><br />  
+         @using ( Html.BeginForm( "saveNewCollege" , "College", FormMethod.Post,  new{ enctype = "multipart/form-data" }))
+           {
+             <table style:"align:center" cellpadding="10" >
+ 
+            <!----- College Name ---------------------------------------------------------->
+            <tbody><tr>
+            <td><label style="font-family:Batang"> College Name: </label></td>
+            <td> @Html.TextBoxFor(m=> m.Name , new { placeholder="lc" , id="colName" , @class = "form-control" , onKeyDown="f3()"}  )<div id="alertMessage1" style="font-weight:bolder ; color:yellow"></div>
+             </td>
+                
+            </tr>
+            <!----- Address ---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang">    Address:</label>  </td>
+            <td><br /> @Html.TextBoxFor(m=> m.Address, new { placeholder="jail road" ,id="address" ,  @class = "form-control" , onKeyDown="f3()"}  )
+             </td>
+            </tr>
+
+                 <!----- city ---------------------------------------------------------->
+            <tr>
+            <td><br />  <label style="font-family:Batang">City: </label></td>
+            <td><br />@Html.TextBoxFor(m=> m.City , new { placeholder="lahore",id="city", @class = "form-control" , onKeyDown="f3()" }  )   
+             </td>
+                
+            </tr>
+                <!----- Password---------------------------------------------------------->
+            <tr>
+            <td><br /> <label style="font-family:Batang"> Password: </label></td>
+            <td><br />  @Html.PasswordFor(m=> m.Password , new { placeholder="*****"  ,id="pass", @class = "form-control" , onKeyDown="f3()"}  ) 
+             </td>
+                
+            </tr>
+                 <!----- Cetegory ---------------------------------------------------------->
+            <tr>
+                
+            <td><br /> <label style="font-family:Batang"> Cetegory:</label>  </td>
+            <td><br /> 
+                <select name="Category" class = "form-control">
+                    <option>Government Girls College </option>
+                      <option>Government Boys College</option>
+                      <option>Private Girls College</option>
+                       <option>Private Boys College </option>
+                       <option>Private Co-College</option>
+               </select>
+             </td>
+            </tr>
+            
+                <tr>
+           </tbody>
+                 </table>
+            <br />
+            <!----- Image ---------------------------------------------------------->
+            <div class="fileinputs">
+            <input type="file" name="image" id="img" accept="image/*",class = "form-control" onclick="f3()" />
+            </div>
+            <br />
+             <br />
+             <br />
+            <!----- Description ---------------------------------------------------------->
+            <p style="font-family:Batang ; font-size:x-large" ><u><b>Add Description:</b></u></p>
+            @Html.TextAreaFor(m => m.Description, new {@class = "form-control"  , id="des" , onKeyDown="f3()"}) 
+            <br />
+             <br />
+             <input style="margin-left:900px "  type="submit" class="btn btn-success" onmouseover="OnMouseOver()"  value="Submit" />
+             <button style="margin-left:50px " type="reset" class="btn btn-warning" >Cancel</button>
+   
+            <div id="alertMessage2" style="font-weight:bolder ;font-size:x-large; color:yellow"></div>
+              <br />
+           }
+
+    </div>

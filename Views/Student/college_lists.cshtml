@@ -1,0 +1,50 @@
+﻿@model List<EAD_Term_Project.Models.College_Degree>
+
+@{
+    ViewBag.Title = "college_lists";
+    
+ }
+
+
+@section college_list
+{
+    <head>
+        <title>Colleges</title>
+    </head>
+}
+     <div id="college_lists_data" class="container" >
+     
+        <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Colleges List</p> 
+
+        <p class="h2" style="font-size:50px ; font-family:Batang ; text-align:center">@ViewBag.domain</p> 
+       <br /><br />
+         <table  style:"align:center"  cellpadding="10" style="border:double ; color:wheat ; font-size:xx-large" class="table table-bordered">
+ 
+           <tbody>
+                <tr>
+                <td><label style="font-family:Batang">College Name</label></td>
+                <td><label style="font-family:Batang">College Address </label></td>
+                <td><label style="font-family:Batang">Details </label></td>
+                </tr>
+                @foreach(EAD_Term_Project.Models.College_Degree col in Model)
+                {
+                    <tr>
+                        <td >
+                            @col.College.CollegeRequest.Name
+                        </td>
+                        <td >
+                            @col.College.CollegeRequest.Address
+                        </td>
+                        <td >
+                           <a href="/College/detail_view_of_college/@col.College.Id">Show</a>
+                        </td>
+                    </tr>   
+                }
+                                                
+            </tbody>
+            </table>
+          <br />
+          <br />
+           
+        
+    </div>

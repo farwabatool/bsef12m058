@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "Sign_up";
+}
+
+@section log_in
+{
+    <head>
+       @model EAD_Term_Project.Models.Admin
+        <title>Sign up</title>
+
+        <script src="../../Content/jquery-1.8.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $("#name").blur(function ()
+            {
+                var name = $("#name").val();
+                $.getJSON("/Admin/CheckAdminName?name=" + name, function (data) {
+                    if (data == false) {
+                        $("#errorMessage").text("This name already exist");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                      
+                    }
+                    else
+                    {
+                       
+                        $("#errorMessage").text("");
+                        if ($("#errorMessage2").val() == "")
+                        {
+                            $("input[type=submit]").removeAttr('disabled');
+                        }
+                    }
+                });
+            });
+                $("#email").blur(function () {
+                    var email = $("#email").val();
+                    $.getJSON("/Admin/CheckAdminEmail?email=" + email, function (data) {
+                        if (data == false) {
+                            $("#errorMessage2").text("This email already exist");
+                            $("input[type=submit]").attr('disabled', 'disabled');
+                        }
+                        else
+                        {
+                            $("#errorMessage2").text("");
+                            if ($("#name") == "") {
+                                $("input[type=submit]").removeAttr('disabled');
+                            }
+                        }
+                    });
+
+                });
+                
+                $("form").submit(function (e) {
+                    var name = $("#name").val();
+                    var email = $("#email").val();
+                    var password = $("#pass").val();
+                    var error1 = $("#errorMessage").val();
+                    var error2 = $("#errorMessage2").val();
+
+                    if (name == "" || email == "" || password == "" || error1 != "" || error2 != "") {
+                        $("#errorMessage3").text("Fill all fields");
+                        e.preventDefault();
+                    }
+                    else
+                    {
+                        $("#errorMessage3").text("")
+                    }
+                });
+             
+        });
+        function f1()
+        {
+            $("#errorMessage").text("");
+            $("#errorMessage2").text("");
+            $("#errorMessage3").text("");
+        }
+        function f3() {
+            $("#errorMessage").text("");
+            $("#errorMessage2").text("");
+            $("#errorMessage3").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+            
+    </script>
+
+    </head>
+}
+     <div id="sign_in_data"  class="container" >
+        <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Sign Up</p> 
+
+        @using (Html.BeginForm("save", "Admin", FormMethod.Post, new { style = "margin:100px 0 0 450px" }))
+        {  <table style:"align:center" cellpadding="10" >
+ 
+            <!----- Admin Name ---------------------------------------------------------->
+            <tbody><tr>
+            <td><label  style="font-family:Batang"> User Name:* </label></td>
+            <td>@Html.TextBoxFor(m=>m.Name, new{placeholder="ali", id="name", @class = "form-control"  ,@onKeyDown="f3()"})  <div id="errorMessage" style="font-weight:bolder ; color:yellow"></div> 
+             </td>
+                
+            </tr>
+           
+
+             <!----- Email---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang"> Email:*</label>  </td>
+            <td><br />@Html.TextBoxFor(m=>m.Email, new{placeholder="ali@pp.com" , id="email" , @class = "form-control" ,  @onKeyDown="f3()"})<div id="errorMessage2" style="font-weight:bolder ; color:yellow"></div>             
+             </td>
+            </tr>
+
+
+                 <!----- Password ---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang"> Password:* </label>  </td>
+            <td><br />  @Html.PasswordFor(m=>m.Password,new{ placeholder="****" , id ="pass" , @class = "form-control " ,  @onKeyDown="f3()"})
+             </td>
+            </tr>
+               
+           
+                </tbody>
+                </table>
+
+            <br />
+             <input  style="margin:10px 0 0 50px"  type="submit" class="btn btn-success"  value="Sign Up" onsubmit="f1()" />
+          <input style="margin:10px 0 0 50px"  type="reset" class="btn btn-warning"  value="Cancel" onclick="f1()" />
+                      <br /><br />
+             <div id="errorMessage3" style="font-weight:900; margin-left:120px; color:yellow"></div>
+        }
+          
+        <br />  <br />
+        <br />  <br />
+        <br />  <br />
+    </div>
+  

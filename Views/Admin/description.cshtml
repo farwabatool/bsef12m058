@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "description";
+}
+
+@section detail
+{
+    @model List<EAD_Term_Project.Models.College_Degree>
+    <head>
+        <title>College Detail</title>
+    </head>
+}
+    <div id="college_detail_data"class="container" >
+ 
+       <p class="h1" style="font-size:80px ; font-family:Batang ; text-align:center">@Model.ElementAt(0).College.CollegeRequest.Name</p> 
+        
+         <img style=" margin-left:25% ; width:50% ; height:50%" src="@Model.ElementAt(0).College.CollegeRequest.Picture" />
+        <br /><br /><p class="h3" style="font-size:50px ; font-family:Batang " ><u><b>Description</b></u></p> <br/><br/>
+        
+        <p id ="college_description" style="font-size:20px ; font-family:Batang ;font-weight:600">@Model.ElementAt(0).College.CollegeRequest.Description</p>
+
+              <br />
+    <br />
+        <br /><br /><p class="h3" style="font-size:50px ; font-family:Batang " ><u><b>Delails</b></u></p> <br/><br/>
+        
+        <table class="table table-bordered">
+ 
+                <tbody><tr>
+                    <td>Address</td>
+                    <td>City</td>
+                    <td>Date of Admission</td>
+                    
+                    </tr>
+
+                    <tr>
+                        <td>@Model.ElementAt(0).College.CollegeRequest.Address</td>
+                    <td>@Model.ElementAt(0).College.CollegeRequest.City</td>
+                    <td> @Model.ElementAt(0).College.CollegeRequest.Admission_Date</td>
+                   
+                    </tr>
+                    </tbody>
+            </table>
+
+        @if(ViewBag.result == true)
+        {
+
+            <br /><br /><p class="h3" style="font-size:50px ; font-family:Batang " ><u><b>Merit Details</b></u></p> <br/><br/>
+        
+                <table class="table table-bordered">
+ 
+                <tbody><tr>
+                <td style="text-align:center ; font-family:Batang" ><b>Sl.No.</b></td>
+                <td style="text-align:center ; font-family:Batang" ><b>Degree</b></td>
+                <td style="text-align:center ; font-family:Batang" ><b>Highest Score</b></td>
+                <td style="text-align:center; font-family:Batang"  ><b>Average Score</b></td>
+                <td style="text-align:center; font-family:Batang"  ><b>Lowest Score</b></td>
+                <td style="text-align:center; font-family:Batang"  ><b>Fees Per Year</b></td>
+                </tr>
+ 
+
+                   @for(int i=0 ; i < Model.Count ; i++)
+                   {
+                       <tr>
+                        <td>@(i+1)</td>
+                        <td>@Model.ElementAt(i).Degree.DegreeName</td>
+                        <td><input  type="text" class = "form-control" readonly="true"   maxlength="30" value="@Model.ElementAt(i).Max_Result"/></td>
+                        <td><input type="text" class = "form-control" readonly="true"  maxlength="30" value="@Model.ElementAt(i).Average_Result"/></td>
+                        <td><input type="text" class = "form-control" readonly="true"  maxlength="30" value="@Model.ElementAt(i).Min_Result"/></td>
+                        <td><input type="text"class = "form-control" readonly="true" maxlength="30" value="@Model.ElementAt(i).Subject_Fees"/></td>
+                    </tr>
+                   }
+      
+ 
+   
+                                </tbody>
+                                </table>
+        }
+    </div>

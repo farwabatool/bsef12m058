@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "update";
+}
+
+@section detail
+{
+    <head>
+        @model List<EAD_Term_Project.Models.College>
+        <title>Update</title>
+
+        
+        <script src="../../Content/jquery-1.8.0.js"></script>
+    </head>
+}
+<div class="row">
+     <div class="col-md-3" id="partial">
+          <script>
+              $("#partial").load("/Default1/SideView", "d1");
+        </script>
+    </div>
+   
+<p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Update College Cetegory</p> 
+    <br /><div style="text-align:center">
+
+<form action="updateCollege" method="post">
+    <table>
+        <tbody>
+ <tr>
+   <td>
+<label style="font-family:Batang;margin-left:200%;font-size:x-large ">College Names</label>&nbsp&nbsp&nbsp&nbsp&nbsp</td>
+     <td>
+         
+<select name="Name" class="form-control" style="margin-left:150%">
+     @for(int i = 0 ; i < Model.Count ; i++)
+     {
+     
+                <option>
+                     @Model.ElementAt(i).CollegeRequest.Name                
+                     
+                </option>        
+        
+                 
+     }
+                      </select></td> 
+
+      </tr>
+            
+         <tr>
+             <td>
+                
+<br /><label style="font-family:Batang; margin-left:200%;font-size:x-large "> Cetegory:</label></td>
+             <td>
+<select name="Category" class="form-control" style="margin-left:150%">
+              <option>
+                    Government Girls College
+                </option>
+                 <option>
+                    Government Boys College
+                </option>
+                 <option>
+                    Private Girls College
+                </option>
+                 <option>
+                    Private Boys College
+                </option>
+                 <option>
+                    Private Co-College
+                </option>
+        
+                 </select>
+   </td>
+       </tr>
+            </tbody>
+         </table>
+    <br />
+    <br />
+     <button type="submit" class="btn btn-success" >Update</button>
+             <button style="margin-left:20px " type="reset" class="btn btn-warning" >Cancel</button>
+     
+
+       </form>   
+     </div>
+    </div>

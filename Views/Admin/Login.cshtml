@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+
+@section log_in
+{
+    <head>
+        @model EAD_Term_Project.Models.Admin
+
+        <title>Login</title>
+        <script src="../../Content/jquery-1.8.0.js"></script>
+        <script>
+           
+            $(document).ready(function () {
+
+                $("#pass").keydown(function () {
+                    $("input[type=submit]").removeAttr('disabled');
+                    $("#errorMessage").text("");
+                });
+                $("#name").keydown(function ()
+                {
+                    $("input[type=submit]").removeAttr('disabled');
+                    $("#errorMessage").text("");
+                });
+               
+            });
+
+            function f1()
+            {
+
+                var name = $("#name").val();
+                var pass = $("#pass").val();
+
+                $.getJSON("/Admin/CheckAdminUserNameAndPassword?pass=" + pass + "&name=" + name, function (data) {
+                    
+                    
+                    if (data == false)
+                    {
+                        $("#errorMessage").text("Invalid User name or password");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                            
+                    }
+                    else
+                    {
+                        $("#errorMessage").text("");
+                        $("input[type=submit]").removeAttr('disabled');
+                    }
+                 });
+            }
+            function f2()
+            {
+                $("#errorMessage").text("");
+                $("input[type=submit]").removeAttr('disabled');
+            }
+        </script>
+    </head>
+}
+     <div id="sign_in_data"  class="container" >
+        <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Sign in</p> 
+
+         @using (Html.BeginForm("after_login", "Admin", FormMethod.Post, new { style = "margin:100px 0 0 450px" }))
+        {    <table style:"align:center" cellpadding="10" >
+ 
+            <!----- College Name ---------------------------------------------------------->
+            <tbody><tr>
+            <td><label  style="font-family:Batang">Usere Name: </label></td>&nbsp&nbsp
+            <td>@Html.TextBoxFor(m=>m.Name, new{placeholder="ali" , @class = "form-control" , id = "name"})   
+             </td>
+                
+            </tr>
+            <!----- Password ---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang"> Password:</label>  </td>
+            <td><br />  @Html.PasswordFor(m=>m.Password,new{ placeholder="****"  , @class = "form-control" , id="pass"})
+             </td>
+            </tr>
+                </tbody>
+                </table>
+
+            <br />
+             <input style="margin:10px 0 0 50px "  type="submit" class="btn btn-success" value="Login" onmouseover="f1()" onmouseout="f2()" />
+          <button style="margin:10px 0 0 50px"  type="reset" class="btn btn-warning" onclick="f2()" >Cancel</button>
+   <br />  
+         <br />   <div id="errorMessage" style="font-weight:bolder;margin-left:6% ; color:yellow"></div> 
+             <br />
+             <div style=" font-size:20px ; margin-left:50px " >
+               @Html.ActionLink("Do not have an account","Sign_up")
+        </div>
+         }
+        
+      
+    </div>
+  

@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "contact_us";
+}
+
+
+
+@section update
+{
+     @model EAD_Term_Project.Models.College
+
+    <head>
+        <title>Update College</title>
+    </head>
+     <script src="../../Content/jquery-1.8.0.js"></script>
+
+    <script>
+    function f3() {
+            $("#alertMessage2").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+        function OnMouseOver() {
+            var a = $("#address").val();
+            var b = $("#pass").val();
+            var c = $("#city").val();
+            var d = $("#pass").val();
+            var f = $("#des").val();
+            if (a == "" || b == "" || c == "" || d == "" || f == "") {
+                $("#alertMessage2").text("Please fill all fields");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+            else {
+                $("#alertMessage2").text("");
+                $("input[type=submit]").removeAttr('disabled');
+            }
+        }
+        </script>
+
+}
+
+ 
+<div class="row">
+
+    <div id="sign_up_data" style="font-weight:500 ; font-size:large ; margin-left:10%" class="col-md-7" >
+      
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Update Data</p> 
+        <br />
+        <form action="/College/saveUpdatedData">
+            <table style:"align:center" cellpadding="10" >
+ 
+            <!----- College Name ---------------------------------------------------------->
+            <tbody><tr>
+            <td><label style="font-family:Batang">College Name :</label></td>
+            <td>@Html.TextBoxFor(m=>m.CollegeRequest.Name ,new{ placeholder="LC"  ,value=@Model.CollegeRequest.Name , @class = "form-control" ,  hidden="hidden"} )</td>
+              
+                
+            </tr>
+            <!----- Address ---------------------------------------------------------->
+            <tr>
+               
+            <td><br />   <label style="font-family:Batang">    Address:</label>  </td>
+            <td><br /> @Html.TextBoxFor(m=>m.CollegeRequest.Address ,new{ placeholder="LC" ,id="address" ,value=@Model.CollegeRequest.Address, @class = "form-control" , onKeyDown="f3()"} )
+             </td>
+            </tr>
+
+                 <!----- city ---------------------------------------------------------->
+            <tr>
+            <td><br />  <label style="font-family:Batang">City: </label></td>
+            <td><br />@Html.TextBoxFor(m=>m.CollegeRequest.City ,new{ placeholder="LC", id="city" ,value=@Model.CollegeRequest.City, @class = "form-control" , onKeyDown="f3()"} )  <br />   
+             </td>
+                
+            </tr>
+                <!----- Password---------------------------------------------------------->
+            <tr>
+            <td><br /> <label style="font-family:Batang"> Password: </label></td>
+            <td><br />  @Html.TextBoxFor(m=>m.CollegeRequest.Password ,new{ placeholder="LC" ,id="pass" ,value=@Model.CollegeRequest.Password, @class = "form-control" , onKeyDown="f3()"}) <br />   
+             </td>
+                
+            </tr>
+                 <!----- Cetegory ---------------------------------------------------------->
+            <tr>
+                
+            <td><br /> <label style="font-family:Batang"> Cetegory:</label>  </td>
+            <td><br />  <select name="Category" class = "form-control">
+                    <option>Government Girls College </option>
+                      <option>Government Boys College</option>
+                      <option>Private Girls College</option>
+                       <option>Private Boys College </option>
+                       <option>Private Co-College</option>
+               </select>
+               
+             </td>
+            </tr>
+                   
+
+   
+                </tbody>
+                </table>
+    
+            <br />
+
+           
+            <p style="font-family:Batang ; font-size:x-large"><u><b>Update Description:</b></u></p>
+            @Html.TextAreaFor(m=>m.CollegeRequest.Description , new {id="des", value=@Model.CollegeRequest.Description , @class = "form-control" , onKeyDown="f3()"})
+            
+            <br />
+             <br />
+            <input style="margin-left:500px "  type="submit" class="btn btn-success" value="Update" onmouseover="OnMouseOver()" />
+             <button style="margin-left:30px " type="reset" class="btn btn-warning" >Cancel</button>
+              
+            
+            <div id="alertMessage2" style="font-weight:bolder ;font-size:x-large; color:yellow"></div>
+             
+            <br />
+            </form> 
+       
+        
+    </div>
+
+    
+ <div class="col-md-3" id="partial" >
+          <script>
+              $("#partial").load("/Default1/CollegeSideView", "d1");
+        </script>
+    </div>
+    </div>

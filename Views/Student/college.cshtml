@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "college";
+}
+
+@section colleges
+{
+    @model List<EAD_Term_Project.Models.Degree>
+    <head>
+        <title>Colleges</title>
+        
+        <script src="../../Content/jquery-1.8.0.js"></script>
+        <script>
+
+
+            $(document).ready(function ()
+            {
+                $("#city").focus(function () {
+                    $("#message1").text("");
+                    $("input[type=submit]").removeAttr('disabled');
+                });
+                $("#marks").focus(function () {
+                    $("input[type=submit]").removeAttr('disabled');
+                    $("#message2").text("");
+                });
+                $("#fee").blur(function ()
+                {
+                    if ($("#fee").val() <= 0 && $("#fee").val() != "")
+                    {
+                        $("#message3").text("Please enter valid fees");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                    }
+                    var value = $("#fee").val();
+                    if (value != "") {
+                        if (jQuery.isNumeric(value) == false) {
+                            $("#message3").text("Plese enter numerics value");
+                            $("input[type=submit]").attr('disabled', 'disabled');
+                        }
+                    }
+
+                });
+                $("#marks").blur(function () {
+                    var value = $("#marks").val();
+
+                    if (jQuery.isNumeric(value) == false) {
+                        $("#message2").text("Plese enter numerics value");
+                        $("input[type=submit]").attr('disabled', 'disabled');
+                    }
+                });
+                $("#fee").focus(function () {
+                    $("input[type=submit]").removeAttr('disabled');
+                    $("#message3").text("");
+                });
+            });
+            function f1()
+            {
+               
+                var a = document.getElementById("marks");
+                var b = document.getElementById("city");
+                var fee = $("#fee").val();
+                
+                if (b.value == "")
+                {
+                    $("#message1").text("Please enter city");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if (a.value == "" || a.value < 0) {
+
+                    $("#message2").text("Plese enter valid marks");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if (fee != "" && fee <= 0)
+                {
+                    $("#message3").text("Please enter valid fees");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                
+                if (jQuery.isNumeric(a.value) == false)
+                {
+                    $("#message2").text("Plese enter numeric value");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+               
+                if (fee!= "" && jQuery.isNumeric(fee) == false) {
+                    $("#message3").text("Plese enter numeric value");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+               
+            }
+            function f2()
+            {
+               
+                $("#message1").text("")
+                $("#message2").text("")
+            }
+            function f3() {
+
+                $("#message1").text("")
+                $("#message2").text("")
+                $("#message3").text("")
+                $("input[type=submit]").removeAttr('disabled');
+            }
+        </script>
+    </head>
+}
+
+    <div id="college_data" class="container" >
+    
+     
+        <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Select College</p> 
+         <br /><br />
+        <form action="/Student/filter" method="post">  
+
+
+        <p class="h1" style="font-size:50px ; font-family:Batang ; text-align:center" >@ViewBag.name</p> 
+         
+            <table style:"align:center" cellpadding="10" >
+ 
+            <!----- Domain---------------------------------------------------------->
+            <tbody><tr>
+            <td><label aria-required="true" style="font-family:Batang">Select Domain: *</label></td>
+            <td><select name="domain" class="form-control">
+                @for(int i = 0 ; i < Model.Count ; i++)
+                {
+                    <option>
+                       @Model.ElementAt(i).DegreeName
+                        </option>
+               }
+                       </select>  
+             </td>
+                
+            </tr>
+                   <!----- city ---------------------------------------------------------->
+            <tr>
+            <td><br /><br /><label aria-required="true" style="font-family:Batang">City: *</label></td>
+            <td><br /><br /><input id="city" type="text" placeholder="lahore" name="city", class = "form-control"/>   </td><td> <br />  <label  style="font-size:larger; color:yellow" id="message1" > <b></b> </label>
+             </td>
+                
+            </tr>
+                <!----- Fees---------------------------------------------------------->
+            <tr>
+            <td><br /><label aria-required="true"   style="font-family:Batang">Fees Limit: </label></td>
+            <td><br /><br /> <input id="fee"  type="text" placeholder="1234" name="fees" , class = "form-control"/>  <br />  </td><td> <br />  <label  style="font-size:larger; color:yellow" id="message3" > <b></b> </label>
+             </td>
+                
+            </tr>
+
+                <!----- Marks---------------------------------------------------------->
+            <tr>
+            <td><label aria-required="true"  style="font-family:Batang">Marks: *</label></td> 
+            <td><br />  <input id="marks" type="text" placeholder="1234" id="marks" name="marks" , class = "form-control"/> </td><td> <br /> <label style="font-size:larger; color:yellow" id="message2" ><b></b> </label>
+             </td>
+                
+            </tr>
+               
+           
+                </tbody>
+                </table>
+             <br />
+             <br />
+             <input  type="submit" class="btn btn-success" onmouseout="f2()" onmouseover="f1()" value="Result" />
+             <button type="reset"   class="btn btn-warning"  onclick="f3()">Cancel</button>
+            </form> 
+        <br />
+        <p style="font-size:larger"><b> * are required fields</b> </p>
+        <br />
+       
+
+        
+    </div>
+   

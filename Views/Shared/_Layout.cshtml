@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+   
+
+    <head>
+        <script src="../../Content/jquery-1.8.0.js"></script>
+            <meta name="viewport" content="width=device-width, initial-scal[;pl,=1" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <!-- Start WOWSlider.com HEAD section -->
+ <link rel="stylesheet" type="text/css" href="engine1/style.css" />
+<script type="text/javascript" src="engine1/jquery.js"></script>
+    
+         @RenderSection("about_us", false)
+          @RenderSection("sign_in", false)
+          @RenderSection("sign_up", false)
+          @RenderSection("index", false)
+          @RenderSection("colleges", false)
+        @RenderSection("updateadd", false)
+         @RenderSection("college_list", false)
+          @RenderSection("contact_us", false)
+          @RenderSection("detail", false)
+          @RenderSection("update", false)
+          @RenderSection("addMerit", false)
+         @RenderSection("updateMerit", false)
+         @RenderSection("allColleges", false)
+       @RenderSection("city", false)
+     <style>
+
+ul#navlist, ul#navlist ul, ul#navlist li
+{
+margin: 0px;
+padding: 0px;
+
+list-style-type:none;
+}
+
+
+
+ul#subnavlist { display: none; }
+ul#subnavlist li { float: none; }
+
+ul#subnavlist li a
+{
+padding: 0px;
+margin: 0px;
+}
+
+ul#navlist li:hover ul#subnavlist
+{
+display: block;
+position: absolute;
+font-size: 13pt;
+padding-top: 5px;
+margin-top:40px;
+padding-left:30px;
+margin-left:50px;
+font-weight:bolder;
+background-color:black;
+}
+
+ul#navlist li:hover ul#subnavlist li a
+{
+display: block;
+width: 10em;
+border: none;
+padding: 2px;
+}
+         body
+          {
+             
+    background-size:   cover;                     
+    background-repeat: no-repeat;
+   
+         }
+ul#navlist li:hover ul#subnavlist li a:before { content: " * " }
+    </style>
+   <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../../Content/bootstrap.js"></script>
+
+        
+</head>
+    
+<body id="bg"  style="background-image:url(../../Content/themes/base/images/project_background.jpg) ;color:wheat">
+   <div style="font-size:200%;font-family:Broadway">
+        <marquee>FUTURE.COM</marquee>
+   </div>
+   
+        <nav class="navbar navbar-inverse" role="navigation" style="background-color:wheat ;color:black">
+   <div style="color:wheat ; font-size:100%;font-family:Broadway">
+       <a class="navbar-brand" href="/home">Home</a>
+       
+    <ul id="navlist">
+<li id="active"><a class="navbar-brand" href="/Student/college">Select College </a>
+<ul id="subnavlist">
+
+
+<li> <a href="/Student/college?collegeName=Government Girls College">Govermnent Girls Colleges</a></li>
+    <li> <a href="/Student/college?collegeName=Government Boys College">Govermnent Boys Colleges</a></li>
+<li><a href="/Student/college?collegeName=Private Girls College">Private Girls Colleges</a></li>
+<li> <a href="/Student/college?collegeName=Private Boys College">Private Boys Colleges</a></li>
+    <li> <a href="/Student/college?collegeName=Private Co-College">Private Co-Colleges</a></li>
+</ul>
+
+</li>
+</ul>
+         
+         <a class="navbar-brand" href="/College/sign_in">Sign in </a>
+          <a class="navbar-brand" href="/College/sign_up">Register</a>
+        <a class="navbar-brand" href="/College/ViewAllColleges">View All Colleges</a>
+       <a class="navbar-brand" href="/DashBoard/Index">View Citys</a> 
+        <a class="navbar-brand" href="/Admin/Login">Admin</a> 
+        
+           
+    </div>
+
+
+       
+   </nav>
+     <div >
+       @RenderBody()
+    </div>
+    <br />
+  
+         <footer   style="background-color:#d5be91; opacity:0.5; border:double; border-color:brown ; color:red " >
+            <div class="container" style="font-weight:900 ;">
+                <div class="row">
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        <h4 style="color:indigo ;font-family:Constantia"><b>About Us</b></h4>
+                        <div class="footer-box-text">
+	                        <p style="color:black;font-family:Constantia">
+	                        	
+                "This is the site which contain information about all the colleges of Pakistan.
+                                
+	                        </p>
+	                        
+                        </div>
+                    </div>
+                    
+                    
+        
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                       
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInUp">
+                        
+                    </div>
+                    <div class="col-sm-3 footer-box wow fadeInDown">
+                        <h4 style="color:indigo;font-family:Constantia"><b>Contact Us </b></h4>
+                        <div class="footer-box-text footer-box-text-contact">
+	                        <p style="color:black;font-family:Constantia"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Address: Punjab University College of Information Technology, Allama Iqbal, Old Campus, The Mall road, Lahore</p>
+	                       
+	                        <p style="color:black"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp; Email: bsef12m058@pucit.edu.pk</p>
+                        </div>
+                                        </div>
+                </div>
+                <div class="row">
+                	<div class="col-sm-12 wow fadeIn">
+                		<div class="footer-border"></div>
+                	</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-7 footer-copyright wow fadeIn">
+                    </div>
+                    <div class="col-sm-5 footer-social wow fadeIn">
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </footer>
+      <div class="container" style=" height:25px;width:inherit;background-color:rgba(0, 0, 0, 0.75)"> 
+                   <h5 style="color: white; font-family:Constantia; font-size:medium">
+                        CopyRight ©  @DateTime.Now.Year - All rights reserved by Farwa Batool
+              
+
+               &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+               &nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+              Design &Develop by &nbsp &nbsp Farwa Batool</h5></div>
+    
+
+</body>
+</html>

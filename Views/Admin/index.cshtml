@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+
+@section index
+{
+    @model List<EAD_Term_Project.Models.College>
+    <head>
+        <title>Home</title>
+    </head>
+}
+
+ <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Colleges</p> 
+
+
+<table>
+    <tbody  >
+
+     
+                @for(int i = 0; i < Model.Count ;i++ )
+                {              
+                    
+                     <td>  <a href="/Admin/description/@Model.ElementAt(i).Id"><img src="@Model.ElementAt(i).CollegeRequest.Picture " style="height:40% ; width:50% ; margin:2% 2% 2% 20%" /> </a> </td>            
+                       
+                  if(i%4 == 0 && i!= 0)
+                   {
+                       
+                       <tr>
+                          
+                       </tr>
+                   }
+       
+                } 
+        </tbody>
+</table>

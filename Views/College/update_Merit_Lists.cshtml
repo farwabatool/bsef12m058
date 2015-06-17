@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "contact_us";
+}
+
+
+
+@section updateMerit
+{
+     @model List<EAD_Term_Project.Models.College_Degree>
+
+    <head>
+        <title>Update Merit Details</title>
+    </head>
+    
+     
+    <script src="../../Content/jquery-1.8.0.js"></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            $("#degree").change( function ()
+            {
+                $("#alertMessage2").text("");
+                $("input[type=submit]").removeAttr('disabled');
+                var deg1 = $("#degree").val();
+            
+                var name = deg1;
+                if (name != "Select Degree")
+                {
+                    $.getJSON("/College/getRecordOfDegree?name=" + name, function (data)
+                    {
+                        var max1 = document.getElementById("max");
+                        var min1 = document.getElementById("min");
+                        var avg1 = document.getElementById("avg");
+                        var fee1 = document.getElementById("fee");
+                        max1.value = data.max;
+                        min1.value = data.min;
+                        avg1.value = data.avg;
+                        fee1.value = data.fee;
+                       
+
+                    });
+                }
+
+            });
+        });
+
+        function OnMouseOver() {
+            var name = $("#degree").val();
+            if (name != "Select Degree") {
+
+                var a = $("#max").val();
+                var b = $("#min").val();
+                var c = $("#avg").val();
+
+                var d = $("#fee").val();
+                if (a == "" || b == "" || c == "" || d == "") {
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+               if (a <= 0 || b <= 0 || c <= 0 || d <= 0) {
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if (b > a || c > a || b >= c)  {
+                   
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if (jQuery.isNumeric(a) == false
+                   || jQuery.isNumeric(b) == false || jQuery.isNumeric(c) == false || jQuery.isNumeric(d) == false)
+                {
+                    $("#alertMessage2").text("fill numeric data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+            }
+            else {
+                $("#alertMessage2").text("No degree selected");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+        }
+        function f3() {
+            $("#alertMessage2").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+        
+       
+    </script>
+     
+}
+
+ 
+<div class="row">
+
+    
+    <div id="sign_up_data" style="font-weight:500 ; font-size:large ; margin-left:8% ;margin-right:5%" class="col-md-7"  >
+      
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Update Merit Details</p> 
+        <br />
+        
+        <form action="/College/updateDegreeToCollege">
+            <table style="font-weight:bolder ; font-size:large" class="table table-bordered" >
+       <tbody>
+           <tr style="font-size:larger">
+           <td>Degree</td>
+            <td>Max Result</td>
+              <td>Avereage Result</td>
+            <td>Min Result</td>
+            <td>Subject Fees</td>
+               <td>Update</td>
+
+               </tr>
+            <tr>
+                   <td style="width:5%" > 
+                   <select name="degree" id="degree" style="color:black">
+                       <option>Select Degree</option>
+           @for (int i = 0; i < Model.Count; i++) 
+           {
+              <option>
+
+                     @Model.ElementAt(i).Degree.DegreeName
+                  </option>
+           }
+                       </select> 
+                       </td>
+                   
+
+                    <td><input id="max" class = "form-control" type="text" name="max" maxlength="30" onKeyDown="f3()"
+                        />
+                    </td>
+                      
+                    <td><input id="avg" class = "form-control" type="text" name="avg" maxlength="30" onKeyDown="f3()" /></td>
+                       
+
+                    <td><input id="min" class = "form-control" type="text" name="min" maxlength="30" onKeyDown="f3()"
+                        /></td>
+              
+                    <td><input id="fee" class="form-control" type="text" name="fee" maxlength="30" onKeyDown="f3()"/></td>
+               
+                   <td >
+                             <input type="submit" class="btn btn-success" value="Update"  onmouseover="OnMouseOver()"/> 
+            
+                   </td>
+                   
+               </tr>
+                </tbody>
+                </table>
+    
+            <br />
+             <div id="alertMessage2" style="font-weight:bolder ;font-size:x-large; color:yellow"></div>
+             
+            </form> 
+       
+        
+    </div>
+
+    
+ <div class="col-md-3" id="partial" >
+          <script>
+              $("#partial").load("/Default1/CollegeSideView", "d1");
+        </script>
+    </div>
+    </div>
+<br />

@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "contact_us";
+}
+
+
+
+@section addMerit
+{
+     @model List<EAD_Term_Project.Models.Degree>
+
+    <head>
+        <title>Add Merit Details</title>
+    </head>
+     <script src="../../Content/jquery-1.8.0.js"></script>
+    <script>
+
+        function OnMouseOver()
+        {
+            var name = $("#degree").val();
+            if (name != "") {
+                var a = $("#max").val();
+                var b = $("#min").val();
+                var c = $("#avg").val();
+                var d = $("#fee").val();
+                if (a == "" || b == "" || c == "" || d == "") {
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if(a <= 0 || b <= 0 || c <= 0 || d <= 0)
+                {
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if (b >= a || c >= a || b>= c)
+                {
+                    $("#alertMessage2").text("Please fill valid data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                if(jQuery.isNumeric(a) == false
+                    || jQuery.isNumeric(b) == false || jQuery.isNumeric(c) == false
+                    || jQuery.isNumeric(d) == false)
+                {
+                    $("#alertMessage2").text("fill numeric data");
+                    $("input[type=submit]").attr('disabled', 'disabled');
+                }
+            }
+            else
+            {
+                $("#alertMessage2").text("No degree Add");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+        }
+        function f3() {
+            $("#alertMessage2").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+    </script>
+}
+
+ 
+<div class="row">
+
+    
+    <div id="sign_up_data" style="font-weight:500 ; font-size:large ; margin-left:8%" class="col-md-7" >
+      
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Add Merit Details</p> 
+        <br />
+        
+        <form action="/College/addDegreeToCollege">
+            <table style="font-weight:bolder ; font-size:large" class="table table-bordered" >
+       <tbody>
+           <tr style="font-size:larger">
+           <td>Select Degree</td>
+            <td>Max Result</td>
+              <td>Avereage Result</td>
+            <td>Min Result</td>
+            <td>Subject Fees</td>
+
+               </tr>
+
+           <tr>
+               <td>
+                   <select id="degree" name="degree" class = "form-control">
+                   @for(int i = 0 ;i < Model.Count ; i++)
+                   {
+                       <option>
+                          @Model.ElementAt(i).DegreeName
+                       </option>
+                   }
+                       </select>
+               </td>
+
+                <td><input class = "form-control" type="text" id="max" name="max" maxlength="30" onKeyDown="f3()" /></td>
+                <td><input class = "form-control" type="text" id="avg" name="average" maxlength="30" onKeyDown="f3()"/></td>
+                <td><input class = "form-control" type="text" id="min" name="min" maxlength="30" onKeyDown="f3()"/></td>
+                <td><input class = "form-control" type="text" id="fee" name="fee" maxlength="30" onKeyDown="f3()"/></td>
+
+           </tr>
+                </tbody>
+                </table>
+    
+          
+             <input style="margin-left:600px "  type="submit" class="btn btn-success" value="Add" onmouseover="OnMouseOver()"/>
+             <button style="margin-left:20px " type="reset" class="btn btn-warning" >Cancel</button>
+              <div id="alertMessage2" style="font-weight:bolder ;font-size:x-large; color:yellow"></div>
+             
+            <br />
+            </form> 
+       
+        
+    </div>
+
+    
+ <div class="col-md-3" id="partial" >
+          <script>
+              $("#partial").load("/Default1/CollegeSideView", "d1");
+        </script>
+    </div>
+    </div>
+<br />

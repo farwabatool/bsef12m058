@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "_AdminLayout";
+}
+
+<html>
+   
+    <head>
+
+        <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <script src="../../Content/bootstrap.js"></script>
+       
+          @RenderSection("index", false)
+         @RenderSection("log_in", false)
+         @RenderSection("sign_in", false)
+        @RenderSection("detail", false)
+        @RenderSection("update", false)
+        @RenderSection("delete", false)
+        @RenderSection("addCollege", false)
+       @RenderSection("changePass", false)
+          @RenderSection("addDegree", false)
+
+    <title></title>   
+ <style>
+
+      body
+          {
+             
+    background-size:   cover;                     
+    background-repeat: no-repeat;
+   
+         
+        }       
+
+ </style>
+           
+       
+</head>
+    
+<body id="bg" style="background-image:url(../../Content/themes/base/images/project_background.jpg) ; background-repeat:round ;color:wheat" >
+    <div style="font-size:200%;font-family:Broadway">
+        <marquee>FUTURE.COM</marquee>
+   </div>
+        <nav class="navbar navbar-inverse" role="navigation" style="background-color:wheat">
+            <div style="color:wheat ; font-size:100%;font-family:Broadway">
+              <a class="navbar-brand" href="/home" >Home</a>
+                <a class="navbar-brand" href="/Admin/index">View All Colleges</a>              
+                 <a class="navbar-brand" href="/Admin/Login">Login</a>
+              
+           
+            </div>
+            <div style="margin-left:90% " >
+               
+                <p style="color:black;font-size:x-large;font-weight:bold">
+                    @try
+                    {
+                       
+                          @Session["AdminName"].ToString().ToUpper();
+                    }
+                    catch(Exception e)
+                    {
+                    }
+                    
+                </p>
+
+            </div>
+       
+   </nav>
+
+    <div>
+       @RenderBody()
+   </div>
+   <footer class="row">
+    <div class="panel-footer text-center" >
+
+ <div class="container"  style="background-color:black">
+        <p  style="color:red; font-family:Batang Forte; font-size:larger"> CopyRight Reserved </p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

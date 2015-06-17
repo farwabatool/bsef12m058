@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "contact_us";
+}
+
+
+
+@section updateadd
+{
+     @model List<EAD_Term_Project.Models.College_Degree>
+
+    <head>
+        <title>Update Admiddion Date</title>
+    </head>
+      <script src="../../Content/jquery-1.8.0.js"></script>
+      
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+        function OnMouseOver()
+        {
+            if ($("#datepicker").val() == "")
+            {
+                $("#alertMessage2").text("Please fill valid data");
+                $("input[type=submit]").attr('disabled', 'disabled');
+            }
+        }
+        function f1()
+        {
+            $("#alertMessage2").text("");
+            $("input[type=submit]").removeAttr('disabled');
+        }
+    </script>
+    
+     
+}
+
+ 
+<div class="row">
+
+    
+    <div id="sign_up_data" style="font-weight:500 ; font-size:large ; margin-left:8% ;margin-right:5%" class="col-md-7"  >
+      
+         <p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Update Admission Date</p> 
+        <br />
+        
+        <form action="/College/updateAddmisionDate">
+            <table>
+                <tr>
+       <td><label> Addmission Date</label></td><td> &nbsp&nbsp&nbsp&nbsp</td>
+      <td> <input type="text" id="datepicker" name="date" class="form-control" onclick="f1()" /> </td>        
+     <td> &nbsp&nbsp&nbsp&nbsp </td><td> <input type="submit" class="btn btn-success" value="Update"  onmouseover="OnMouseOver()"/> </td> 
+        </tr></table>    
+              <div id="alertMessage2" style="font-weight:bolder ;font-size:x-large; color:yellow"></div>
+          
+            </form> 
+       
+          
+    </div>
+
+    
+ <div class="col-md-3" id="partial" >
+          <script>
+              $("#partial").load("/Default1/CollegeSideView", "d1");
+        </script>
+    </div>
+    </div>
+<br />

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+
+@section allColleges
+{
+    @model List<EAD_Term_Project.Models.College>
+    <head>
+        <title>All Colleges</title>
+        
+    </head>
+}
+<form action="/College/search" class="navbar-form navbar-left pull-right" role="search">
+       <div class="form-group">
+           <input name="collegeName" type="text" placeholder="seach" class="form-control"/>
+       </div>
+       <button type="submit" class="btn btn-success">Search</button>
+    </form>
+<br />
+ <p class="h1" style="font-size:100px;margin-left:20% ; font-family:Batang ; text-align:center">Colleges</p> 
+
+   
+
+<table>
+    <tbody  >
+
+     
+                @for(int i = 0; i < Model.Count ;i++ )
+                {              
+                    
+                     <td>  <a href="/College/detail_view_of_college/@Model.ElementAt(i).Id"><img src="@Model.ElementAt(i).CollegeRequest.Picture " style="height:40% ; width:50% ; margin:2% 2% 2% 20%" /> </a> 
+
+                    <P style="margin-left:20%">@Model.ElementAt(i).CollegeRequest.Name</P>
+                     </td>            
+                       
+                  if(i%4 == 0 && i!= 0)
+                   {
+                       
+                       <tr>
+                          
+                       </tr>
+                   }
+       
+                } 
+        </tbody>
+</table>

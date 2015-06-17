@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "delete";
+}
+
+@section addCollege
+{
+    <head>
+        @model List<EAD_Term_Project.Models.CollegeRequest>
+        <title>Add College</title>
+         <script src="../../Content/jquery-1.8.0.js"></script>
+
+      
+    </head>
+}
+
+<div class="row">
+    <div class="col-md-3" id="partial">
+          <script>
+              $("#partial").load("/Default1/SideView", "d1");
+        </script>
+    </div>
+   
+<p class="h1" style="font-size:100px ; font-family:Batang ; text-align:center">Add Requested Colleges</p> 
+    <br />
+
+    <div class="col-md-9">
+<form action="deleteCollege" method="post">
+    <table style="font-weight:bolder ; font-size:large" class="table table-bordered"> 
+        <tbody >
+
+
+            <tr>
+                <td>
+                    Name
+                </td>
+                <td> Address</td>
+                <td>Cetegory</td>
+                <td>Add</td>
+                <td>Remove</td>
+            </tr>
+
+               
+     @for (int i = 0; i < Model.Count; i++)
+     {
+          <tr>
+               <td>
+                    @Model.ElementAt(i).Name  
+              </td>   
+             <td>
+                        @Model.ElementAt(i).Address 
+              </td>   
+             <td>
+                        @Model.ElementAt(i).Category
+             </td> 
+             <td>
+
+            <a href="/Admin/saveRequest?requestID=@Model.ElementAt(i).Id"><input type="button" class="btn btn-success" value="Add" /></a>
+             </td>
+             <td>
+                <a href="/Admin/deleteRequest?requestID=@Model.ElementAt(i).Id"> <input type="button" class="btn btn-warning" value="Remove" /></a>
+             </td>
+        </tr>         
+         
+     }
+        
+
+     
+        
+            </tbody>
+         </table>
+    <br />
+    <br />
+   
+
+       </form>   
+        </div>
+     </div>
